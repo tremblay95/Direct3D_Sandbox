@@ -61,6 +61,28 @@ D3dSb::Window::~Window()
 	UnregisterClass(windowClassName, hInst);
 }
 
+std::optional<int> D3dSb::Window::ProcessMessages()
+{
+	// Message pump
+
+	MSG msg;
+
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		// Check for quit
+		if (msg.message == WM_QUIT)
+		{
+			return (int)msg.wParam;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	// Return empty optional when not quitting
+	return {};
+}
+
 LRESULT D3dSb::Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)

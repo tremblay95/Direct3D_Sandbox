@@ -1,6 +1,8 @@
 #include "Window.h"
 #include "WindowsInclude.h"
 
+using namespace D3dSb;
+
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -8,31 +10,24 @@ int CALLBACK WinMain(
 	int       nShowCmd)
 {
 	// Set up window
-	D3dSb::Window window(1280, 720, L"Direct3D SandBox");
+	Window window(1280, 720, L"Direct3D SandBox");
 
-	// Message pump
-	bool hasMsg = false;
-	MSG msg;
-	msg.message = WM_NULL;
-	PeekMessage(&msg, nullptr, 0u, 0u, PM_NOREMOVE);
+	// Set up GFX
 
-	while (WM_QUIT != msg.message)
+
+	while (true)
 	{
-		hasMsg = (PeekMessage(&msg, nullptr, 0u, 0u, PM_REMOVE) != 0);
-
-		if (hasMsg)
+		if (const auto errorCode = Window::ProcessMessages())
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			return *errorCode;
 		}
-		else
-		{
-			//update
 
-			//render
-			
-			//present
-		}
+		//update
+		
+		//render
+		
+		//present
+		
 	}
 
 	return 0;

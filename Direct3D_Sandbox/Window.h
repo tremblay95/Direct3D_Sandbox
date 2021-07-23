@@ -1,5 +1,6 @@
 #pragma once
 #include "WindowsInclude.h"
+#include <optional>
 
 namespace D3dSb {
 
@@ -13,6 +14,9 @@ namespace D3dSb {
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
 
+		static std::optional<int> ProcessMessages();
+
+	private:
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	private:
