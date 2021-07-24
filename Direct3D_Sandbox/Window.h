@@ -16,6 +16,8 @@ namespace D3dSb {
 
 		static std::optional<int> ProcessMessages();
 
+		HWND GetHwnd() const noexcept;
+
 	private:
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 

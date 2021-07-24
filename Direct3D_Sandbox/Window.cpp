@@ -83,6 +83,11 @@ std::optional<int> D3dSb::Window::ProcessMessages()
 	return {};
 }
 
+HWND D3dSb::Window::GetHwnd() const noexcept
+{
+	return hWnd;
+}
+
 LRESULT D3dSb::Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
